@@ -1,7 +1,6 @@
 /*-----------------------------------------------------------------------------------
 /* Styles Switcher
 -----------------------------------------------------------------------------------*/
-
 window.console = window.console || (function(){
 	var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function(){};
 	return c;
@@ -9,90 +8,89 @@ window.console = window.console || (function(){
 
 
 jQuery(document).ready(function($) {
-	
+
 		// Color Changer
 		$(".green" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/green.css" );
+			$("#colors" ).attr("href", "static/css/colors/green.css" );
 			return false;
 		});
 		
 		$(".blue" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/blue.css" );
-			return false;
+			$("#colors" ).attr("href", "static/css/colors/blue.css");
 		});
 		
 		$(".orange" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/orange.css" );
+			$("#colors" ).attr("href", "static/css/colors/orange.css" );
 			return false;
 		});
 		
 		$(".navy" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/navy.css" );
+			$("#colors" ).attr("href", "static/css/colors/navy.css" );
 			return false;
 		});
 		
 		$(".yellow" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/yellow.css" );
+			$("#colors" ).attr("href", "static/css/colors/yellow.css" );
 			return false;
 		});
 		
 		$(".peach" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/peach.css" );
+			$("#colors" ).attr("href", "static/css/colors/peach.css" );
 			return false;
 		});
 		
 		$(".beige" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/beige.css" );
+			$("#colors" ).attr("href", "static/css/colors/beige.css" );
 			return false;
 		});
 
 		$(".purple" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/purple.css" );
+			$("#colors" ).attr("href", "static/css/colors/purple.css" );
 			return false;
 		});
 
 		$(".red" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/red.css" );
+			$("#colors" ).attr("href", "static/css/colors/red.css" );
 			return false;
 		});
 
 		$(".pink" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/pink.css" );
+			$("#colors" ).attr("href", "static/css/colors/pink.css" );
 			return false;
 		});
 		
 		$(".celadon" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/celadon.css" );
+			$("#colors" ).attr("href", "static/css/colors/celadon.css" );
 			return false;
 		});
 		
 		$(".brown" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/brown.css" );
+			$("#colors" ).attr("href", "static/css/colors/brown.css" );
 			return false;
 		});
 		
 		$(".cherry" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/cherry.css" );
+			$("#colors" ).attr("href", "static/css/colors/cherry.css" );
 			return false;
 		});
 		
 		$(".gray" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/gray.css" );
+			$("#colors" ).attr("href", "static/css/colors/gray.css" );
 			return false;
 		});
 		
 		$(".darkcol" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/dark.css" );
+			$("#colors" ).attr("href", "static/css/colors/dark.css" );
 			return false;
 		});
 		
 		$(".cyan" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/cyan.css" );
+			$("#colors" ).attr("href", "static/css/colors/cyan.css" );
 			return false;
 		});
 		
 		$(".olive" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/olive.css" );
+			$("#colors" ).attr("href", "static/css/colors/olive.css" );
 			return false;
 		});
 
@@ -140,7 +138,7 @@ jQuery(document).ready(function($) {
 			$("body").css("backgroundColor","e9e9e9");
 			$("body").css("backgroundImage","none");
 			$(".colors li a" ).removeClass("active");
-			$("#colors" ).attr("href", "css/colors/green.css" );
+			$("#colors" ).attr("href", "static/css/colors/green.css" );
 			$(window).resize();
 		});
 			
