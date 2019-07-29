@@ -1,0 +1,309 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<meta charset="utf-8">
+<title>Chow</title>
+
+<!-- Mobile Specific Metas
+================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/colors/green.css' %}" id="colors">
+
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+	
+
+<!-- Header
+================================================== -->
+<header id="header">
+
+<!-- Container -->
+<div class="container">
+
+	<!-- Logo / Mobile Menu -->
+	<div class="three columns">
+		<div id="logo">
+			<h1><a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Chow" /></a></h1>
+		</div>
+	</div>
+
+
+<!-- Navigation
+================================================== -->
+<div class="thirteen columns navigation">
+
+	<nav id="navigation" class="menu nav-collapse">
+		<ul>
+			<li><a href="{% url 'home' %}">홈</a></li>
+			
+			<li><a href="#">레시피</a>
+				<ul>
+					<li><a href="{% url 'bab:browserecipes' %}">레시피 찾기</a></li>
+					<li><a href="{% url 'bab:submitrecipe' %}">레시피 등록</a></li>
+				</ul>
+			</li>
+		
+			<li><a href="{% url 'bab:contact' %}">문의</a></li>
+		</ul>
+	</nav>
+
+</div>
+
+</div>
+<!-- Container / End -->
+</header>
+
+
+
+{% block content %}
+{% endblock %}
+
+<!-- Share -->
+<div class="widget">
+    <h4 class="headline">Share</h4>
+    <span class="line margin-bottom-30"></span>
+    <div class="clearfix"></div>
+    
+    <ul class="share-buttons">
+        <li class="facebook-share">
+            <a href="#">
+                <span class="counter">1,234</span>
+                <span class="counted">Fans</span>
+                <span class="action-button">Like</span>
+            </a>
+        </li>
+
+        <li class="twitter-share">
+            <a href="#">
+                <span class="counter">863</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+
+        <li class="google-plus-share">
+            <a href="#">
+                <span class="counter">902</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+
+<!-- 			<li class="behance-share">
+            <a href="#">
+                <span class="counter">902</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+
+        <li class="instagram-share">
+            <a href="#">
+                <span class="counter">902</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+
+        <li class="dribbble-share">
+            <a href="#">
+                <span class="counter">902</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+
+        <li class="linkedin-share">
+            <a href="#">
+                <span class="counter">902</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+
+
+        <li class="github-share">
+            <a href="#">
+                <span class="counter">902</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+
+
+        <li class="youtube-share">
+            <a href="#">
+                <span class="counter">902</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+
+        <li class="pinterest-share">
+            <a href="#">
+                <span class="counter">902</span>
+                <span class="counted">Followers</span>
+                <span class="action-button">Follow</span>
+            </a>
+        </li>
+-->
+    </ul>
+    <div class="clearfix"></div>
+</div>
+
+
+
+
+<!-- Footer
+================================================== -->
+<div id="footer">
+
+	<!-- Container -->
+	<div class="container">
+
+		<div class="five columns">
+			<!-- Headline -->
+			<h3 class="headline footer">About</h3>
+			<span class="line"></span>
+			<div class="clearfix"></div>
+			<p>Cras at ultrices erat, sed vulputate eros. Nunc at augue gravida est fermentum vulputate. Pellentesque et ipsum in dui malesuada tempus.</p>
+		</div>
+
+		<div class="three columns">
+
+			<!-- Headline -->
+			<h3 class="headline footer">Archives</h3>
+			<span class="line"></span>
+			<div class="clearfix"></div>
+
+			<ul class="footer-links">
+				<li><a href="#">June 2014</a></li>
+				<li><a href="#">July 2014</a></li>
+				<li><a href="#">August 2014</a></li>
+				<li><a href="#">September 2014</a></li>
+				<li><a href="#">November 2014</a></li>
+			</ul>
+
+		</div>
+
+		<div class="three columns">
+
+			<!-- Headline -->
+			<h3 class="headline footer">Recipes</h3>
+			<span class="line"></span>
+			<div class="clearfix"></div>
+
+			<ul class="footer-links">
+				<li><a href="browse-recipes.html">Browse Recipes</a></li>
+				<li><a href="recipe-page-1.html">Recipe Page</a></li>
+				<li><a href="submit-recipe.html">Submit Recipe</a></li>
+			</ul>
+
+		</div>
+
+		<div class="five columns">
+
+			<!-- Headline -->
+			<h3 class="headline footer">Newsletter</h3>
+			<span class="line"></span>
+			<div class="clearfix"></div>
+			<p>Sign up to receive email updates on new product announcements, gift ideas, sales and more.</p>
+
+			<form action="#" method="get">
+				<input class="newsletter" type="text" placeholder="mail@example.com" value=""/>
+				<button class="newsletter-btn" type="submit">Subscribe</button>
+
+			</form>
+		</div>
+
+	</div>
+	<!-- Container / End -->
+
+</div>
+<!-- Footer / End -->
+
+<!-- Footer Bottom / Start -->
+<div id="footer-bottom">
+
+	<!-- Container -->
+	<div class="container">
+
+		<div class="eight columns">© Copyright 2014 by <a href="#">Chow</a>. All Rights Reserved.</div>
+
+	</div>
+	<!-- Container / End -->
+
+</div>
+<!-- Footer Bottom / End -->
+<!-- Java Script
+================================================== -->
+<script src="{% static 'scripts/jquery-1.11.0.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-migrate-1.2.1.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.superfish.js' %}"></script>
+<script src="{% static 'scripts/jquery.royalslider.min.js' %}"></script>
+<script src="{% static 'scripts/responsive-nav.js' %}"></script>
+<script src="{% static 'scripts/hoverIntent.js' %}"></script>
+<script src="{% static 'scripts/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'scripts/chosen.jquery.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.tooltips.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.pricefilter.js' %}"></script>
+<script src="{% static 'scripts/custom.js' %}"></script>
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="{% static 'scripts/switcher.js' %}"></script>
+
+<div id="style-switcher">
+	<h2>Style Switcher <a href="#"></a></h2>
+	
+	<div>
+		<h3>Predefined Colors</h3>
+		<ul class="colors" id="color1">
+			<li><a href="#" class="green" title="Green"></a></li>
+			<li><a href="#" class="blue" title="Blue"></a></li>
+			<li><a href="#" class="orange" title="Orange"></a></li>
+			<li><a href="#" class="navy" title="Navy"></a></li>
+			<li><a href="#" class="yellow" title="Yellow"></a></li>
+			<li><a href="#" class="peach" title="Peach"></a></li>
+			<li><a href="#" class="beige" title="Beige"></a></li>
+			<li><a href="#" class="purple" title="Purple"></a></li>
+			<li><a href="#" class="celadon" title="Celadon"></a></li>
+			<li><a href="#" class="pink" title="Pink"></a></li>
+			<li><a href="#" class="red" title="Red"></a></li>
+			<li><a href="#" class="brown" title="Brown"></a></li>
+			<li><a href="#" class="cherry" title="Cherry"></a></li>
+			<li><a href="#" class="cyan" title="Cyan"></a></li>
+			<li><a href="#" class="gray" title="Gray"></a></li>
+			<li><a href="#" class="darkcol" title="Dark"></a></li>
+		</ul>
+		
+	</div>
+	
+	<div id="reset"><a href="#" class="button color">Reset</a></div>
+		
+</div>
+
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
