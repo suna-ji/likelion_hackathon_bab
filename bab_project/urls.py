@@ -15,11 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import home
+from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',home, name = "home" ),
+    path('', home, name = "home" ),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('contact/',contact, name = "contact"),
+    path('productpage/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+    path('browserecipes/',browserecipes, name = "browserecipes"),
+
+
 ]
 
 
