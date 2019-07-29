@@ -5,9 +5,7 @@ import sys
 
 
 def main():
-=======
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bab_project.settings')
->>>>>>> bab_suna
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'baba_project.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
