@@ -18,11 +18,13 @@ from django.urls import path
 from . import views
 
 app_name = "bab"
+# bab:browserecipes처럼 해주는 역할
 
 urlpatterns = [
     path('browserecipes/',views.browserecipes, name = "browserecipes"),
     path('contact/',views.contact, name = "contact"),
     path('productpage/',views.productpage, name = "productpage"),
+    path('postcreate/', views.postcreate, name = "postcreate"),
     path('recipepage/',views.recipepage, name = "recipepage"),
     path('shop/',views.shop, name = "shop"),
     path('shortcodes/',views.shortcodes, name = "shortcodes"),

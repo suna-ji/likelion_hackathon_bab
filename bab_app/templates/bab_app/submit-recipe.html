@@ -40,195 +40,123 @@
 	<div class="sixteen columns">
 		<div class="submit-recipe-form">
 
-
 			<!-- Recipe Title -->
-			<h4>Recipe Title</h4>
-			<nav class="title">
-				<input class="search-field" type="text" placeholder="" value=""/>
-			</nav>
-			<div class="clearfix"></div>
+			<h4>레시피 제목을 적어주세요!</h4>
+			<form action = "{% url 'bab:postcreate' %}" method = "POST" enctype = "multipart/form-data"> 
+				{% csrf_token %}
+				
+				<nav class="title">
+						<input class="search-field" type="text" name = "title" placeholder="예)전남친 토스트" value=""/>
+				</nav>
+				<div class="clearfix"></div>
+				<div class="margin-top-25"></div>
 
 
-			<div class="margin-top-25"></div>
+				<!-- Choose Category -->
+				<div class="select">
+						<h4>레시피의 카테고리를 선택해주세요</h4>
+						<select data-placeholder="Choose Category" class="chosen-select-no-single" name = "category">
+							<option value="면">면</option>
+							<option value="밥">밥</option>
+							<option value="아침">아침</option>
+							<option value="점심">점심</option>
+							<option value="저녁">저녁</option>
+							<option value="국">국</option>
+							<option value="샐러드">샐러드</option>
+							<option value="고기">고기</option>
+							<option value="해산물">해산물</option>
+							<option value="야채">야채</option>
+							<option value="디저트">디저트</option>
+							<option value="기념일">기념일</option>
+							<option value="5분요리">5분요리</option>
+							<option value="전자레인지">전자레인지</option>
+							<option value="음료">음료</option>
+							<option value="빵">빵</option>
+							<option value="다이어트">다이어트</option>
+						</select>
+					</div>
+	
+	
+				<div class="margin-top-25"></div>
+			
+				<!-- Short Summary -->
+				<h4>레시피 설명을 적어주세요</h4>
+				<textarea class="WYSIWYG" name="content" cols="40" rows="3" id="content" spellcheck="true"></textarea>
+
+				<div class="margin-top-25"></div>
 
 
-			<!-- Choose Category -->
-			<div class="select">
-				<h4>Choose Category</h4>
-				<select data-placeholder="Choose Category" class="chosen-select-no-single">
-					<option value="1">All</option>
-					<option value="2">Breakfast</option>
-					<option value="3">Lunch</option>
-					<option value="4">Beverages</option>
-					<option value="5">Appetizers</option>
-					<option value="6">Soups</option>
-					<option value="7">Salads</option>
-					<option value="8">Beef</option>
-					<option value="9">Poultry</option>
-					<option value="10">Pork</option>
-					<option value="11">Seafood</option>
-					<option value="12">Vegetarian</option>
-					<option value="13">Vegetables</option>
-					<option value="14">Desserts</option>
-					<option value="15">Canning / Freezing</option>
-					<option value="16">Breads</option>
-					<option value="17">Holidays</option>
-				</select>
+				<!-- Upload images -->
+				<h4>레시피 사진을 올려주세요</h4>
+				
+
+				<input class = "upload-btn" type = "file" name = "image" placeholder = "아직 선택된 사진이 없습니다.">
+
+				<div class="clearfxix"></div>
+				<div class="margin-top-15"></div>
+
+
+				<!-- Ingredients -->
+				<fieldset class="addrecipe-cont" name="ingredients">
+					<h4>재료를 입력해주세요</h4>
+						<table name = "memberTable" id="memberTable" border="1" style="width:500px;">
+							<tr>
+								<td><input type="text" name ="ingredientname"  placeholder = "재료명"/></td>
+								<td><input type="text" name ="ingredientnote"  placeholder = "(양, 추가정보)"/></td>
+								<td style="width:50px;"></td>
+							</tr>
+						</table>
+				</fieldset>
+			 
+			
+			 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+			 <script type="text/javascript">
+				$(function() {
+					var itemIndex = 0;
+					$("#btnAddRow").on("click",function() {
+						// clone
+						itemIndex++;
+						
+						$.trClone = $("#memberTable tr:last").clone().html();
+						$.newTr = $("<tr>"+$.trClone+"</tr>");
+
+						$("#memberTable").append($.newTr);
+						// $("#memberTable").append('<tr><td><input name = "igredientname'+ itemIndex+'"  type="text"/></td><td><input name="ingredientnote'+ itemIndex+'"  type="text"/></td><td style="width:50px;"></td></tr>');
+						// delete Button 추가
+						$.btnDelete = $(document.createElement("input"));
+						$.btnDelete.attr({
+							name : "btnRemove",
+							type : "button" ,
+							value : "삭제"
+						});
+						$("#memberTable tr:last td:last").html("");
+						$("#memberTable tr:last td:last").append($.btnDelete);
+		
+						// 버튼에 클릭 이벤트 추가
+						$("#memberTable tr>td:last>input[type='button']").on('click', function(){
+							$(this).parent().parent().remove();
+						});
+					});
+		
+					// 초기화
+					$("#tableReset").on("click",function(){
+						$("#frmTest").each(function(){ this.reset(); });
+						$("input[name='btnRemove']").each(function () {
+							$(this).trigger('click');
+						});
+					});
+				});
+			</script>
+
+			<div style="width:500px;text-align:right;">
+					<input type="button" value="재료추가"  id="btnAddRow" />
+					<input type="button" value="초기화" id="tableReset"/>
 			</div>
-
-
+	
 			<div class="margin-top-25"></div>
 
-
-			<!-- Short Summary -->
-			<h4>Short summary</h4>
-			<textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
-
-
-			<div class="margin-top-25"></div>
-
-
-			<!-- Upload Photos -->
-			<h4>Upload your photos</h4>
-
-			<ul class="recipe-gallery">
-				<li>No photos uploaded yet</li>
-			</ul>
-
-			<label class="upload-btn">
-			    <input type="file" multiple />
-			    <i class="fa fa-upload"></i> Upload
-			</label>
-
-
-			<div class="clearfxix"></div>
-			<div class="margin-top-15"></div>
-
-
-			<!-- Ingredients -->
-			<fieldset class="addrecipe-cont" name="ingredients">
-				<h4>Ingredients:</h4>
-
-				<table id="ingredients-sort">
-
-					<tr class="ingredients-cont ing">
-						<td class="icon"><i class="fa fa-arrows"></i></td>
-						<td><input name="ingredient_name" tabindex="5" type="text" placeholder="Name of ingredient" /> </td>
-						<td><input name="ingredient_note" tabindex="6" type="text" placeholder="Notes (quantity, additional info)" /></td>
-						<td class="action"><a title="Delete" class="delete" href="#"><i class="fa fa-remove"></i></a> </td>
-					</tr>
-
-				</table>
-
-				<a href="#" class="button color add_ingredient">Add new ingredient</a>
-				<a href="#" class="button add_separator">Add separator</a>
-			</fieldset>
-
-
-			<div class="margin-top-25"></div>
-
-
-			<!-- Directions -->
-			<h4>Directions</h4>
-			<textarea class="WYSIWYG" name="directions" cols="40" rows="3" id="directions" spellcheck="true"></textarea>
-
-
-			<div class="margin-top-25 clearfix"></div>
-
-
-			<!-- Additional Informations -->
-			<h4>Additional Informations</h4>
-
-			<fieldset class="additional-info">
-				<table>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="4">Yield</label></td>
-					<td><input id="4" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="1">Preparation Time</label></td>
-					<td><input id="1" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="2">Cooking Time</label></td>
-					<td><input id="2" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="4">Level</label></td>
-					<td>
-						<select data-placeholder="Choose Level" class="chosen-select-no-single">
-							<option value="1">&nbsp;</option>
-							<option value="2">Easy</option>
-							<option value="3">Medium</option>
-							<option value="4">Hard</option>
-							<option value="5">Master</option>
-						</select>
-					</td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="5">Alergens</label></td>
-					<td>
-						<select data-placeholder="Choose Alergens" class="chosen-select" multiple>
-							<option value="2">Peanut</option>
-							<option value="3">Tree nuts</option>
-							<option value="4">Milk</option>
-							<option value="5">Egg</option>
-							<option value="6">Wheat</option>
-							<option value="7">Soy</option>
-							<option value="8">Fish</option>
-							<option value="9">Shellfish</option>
-						</select>
-					</td>
-				</tr>
-
-				</table>
-			</fieldset>
-
-
-			<div class="margin-top-25"></div>
-
-
-			<!-- Nutrition Facts -->
-			<h4>Nutrition Facts</h4>
-
-			<fieldset class="additional-info">
-				<table>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="5">Calories</label></td>
-					<td><input id="5" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="6">Total Carbohydrate</label></td>
-					<td><input id="6" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="7">Total Fat</label></td>
-					<td><input id="7" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="8">Protein</label></td>
-					<td><input id="8" type="text" /></td>
-				</tr>
-
-				<tr class="ingredients-cont">
-					<td class="label"><label for="9">Cholesterol</label></td>
-					<td><input id="9" type="text" /></td>
-				</tr>
-
-				</table>
-			</fieldset>
-
-			<div class="margin-top-30"></div>
-			<a href="" class="button color big">Submit Recipe</a>
+			<input type="submit" class="button color big" id="sendMessageButton" value = "레시피 등록">
+			
 
 		</div>
 	</div>
@@ -240,13 +168,14 @@
 
 </div>
 <!-- Wrapper / End -->
+</form>	
 
 
 
 
 
 
-<!-- WYSIWYG Editor -->
+<!— WYSIWYG Editor —>
 <script type="text/javascript" src="{% static 'scripts/jquery.sceditor.bbcode.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'scripts/jquery.sceditor.js' %}"></script>
 
