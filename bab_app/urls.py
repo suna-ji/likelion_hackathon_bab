@@ -30,5 +30,6 @@ urlpatterns = [
     path('shortcodes/',views.shortcodes, name = "shortcodes"),
     path('submitrecipe/',views.submitrecipe, name = "submitrecipe"),
     path('typography/',views.typography, name = "typography"),
+    path('sendemail/', views.sendemail, name = "sendemail"),
 ]
 

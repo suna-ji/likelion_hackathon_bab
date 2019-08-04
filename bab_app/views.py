@@ -1,17 +1,28 @@
 from django.shortcuts import render, redirect, get_object_or_404
 import pdb
 from .models import *
+from django.core.mail import EmailMessage
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_text
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 
 
 def browserecipes(request):
     return render(request, 'bab_app/browse-recipes.html')
-  
+
 
 def contact(request):
     return render(request, 'bab_app/contact.html')
-
 
 def productpage(request):
     return render(request, 'bab_app/product-page.html')
@@ -59,3 +70,19 @@ def typography(request):
     return render(request, 'bab_app/typography.html')
 
 
+
+def sendemail(request):
+    username = request.POST.get('userName')
+    subject = "밥줘 사용자 "+username+"님이 보내신 문의 메일입니다."
+    message = request.POST.get('userComment')
+    useremail = request.POST.get('userEmail')
+    if subject and message and useremail:
+        try:
+            send_mail(subject, message, useremail, ['givemebab123@gmail.com'])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+        return redirect('home')
+    else:
+        # In reality we'd use a form class
+        # to get proper validation errors.
+        return HttpResponse('Make sure all fields are entered and valid.')    

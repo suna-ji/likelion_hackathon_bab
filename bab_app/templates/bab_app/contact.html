@@ -36,7 +36,7 @@
 	<div class="sixteen columns">
 		<div class="image-with-caption contact">
 			<img class="rsImg" src="{% static 'images/contact.jpg' %}" alt="" />
-			<span>Contact me with any questions</span>
+			<span>자유롭게 문의를 남겨주세요</span>
 		</div>
 	</div>
 </div>
@@ -51,7 +51,7 @@
 
 <!-- Contact Form -->
 <div class="twelve columns">
-		<h3 class="headline">Contact Form</h3><span class="line margin-bottom-25"></span><div class="clearfix"></div>
+		<h3 class="headline"></h3><span class="line margin-bottom-25"></span><div class="clearfix"></div>
 
 		<!-- Contact Form -->
 		<section id="contact">
@@ -60,30 +60,30 @@
 			<mark id="message"></mark>
 
 			<!-- Form -->
-			<form method="post" name="contactform" id="contactform">
-
-				<fieldset>
-
-					<div>
-						<label>Name:</label>
-						<input name="name" type="text" id="name" />
-					</div>
-
-					<div>
-						<label >Email: <span>*</span></label>
-						<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />
-					</div>
-
-					<div>
-						<label>Message: <span>*</span></label>
-						<textarea name="comment" cols="40" rows="3" id="comment" spellcheck="true"></textarea>
-					</div>
-
-				</fieldset>
-				<div id="result"></div>
-				<input type="submit" class="submit" id="submit" value="Send Message" />
-				<div class="clearfix"></div>
-			</form>
+			<form action = "{% url 'bab:sendemail' %}" method = "POST" enctype = "multipart/form-data"> 
+					{% csrf_token %}
+					<fieldset>
+						<div>
+							<label>Name:</label>
+							<input name="userName" type="text" id="userName" />
+						</div>
+	
+						<div>
+							<label >Email: <span>*</span></label>
+							<input name="userEmail" type="email" id="userEmail" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />
+						</div>
+	
+						<div>
+							<label>Message: <span>*</span></label>
+							<textarea name="userComment" cols="40" rows="3" id="userComment" spellcheck="true"></textarea>
+						</div>
+	
+					</fieldset>
+					<div id="result"></div>
+					<input type="submit" class="button color big" id="sendMessageButton" value = "메시지 전송">
+					<div class="clearfix"></div>
+				</form>
+	
 
 		</section>
 		<!-- Contact Form / End -->
