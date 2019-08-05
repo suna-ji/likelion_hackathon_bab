@@ -23,6 +23,7 @@ class Post(TimeStampedModel):
     amount = CharField(max_length = 50 , null = True)
     cooking_time = CharField(max_length = 50, null = True)
     cooking_level = CharField(max_length = 50, null = True)
+    favorite = ManyToManyField(User, related_name = "favorite_post", blank = True)
 
     def __str__(self):
        return self.title

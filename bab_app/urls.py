@@ -1,18 +1,3 @@
-"""bab_project URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
 from . import views
@@ -31,5 +16,9 @@ urlpatterns = [
     path('typography/',views.typography, name = "typography"),
     path('sendemail/', views.sendemail, name = "sendemail"),
     path('recipepage/<int:id>', views.recipepage, name = "recipepage"),
+    path('like_toggle/<int:id>/', views.like_toggle, name="like_toggle"),
+    path('post_like/', views.post_like, name="post_like"),
+    path('favorite_toggle/<int:post_id>/', views.favorite_toggle, name="favorite_toggle"),
+    path('favorite/<int:user_id>/', views.favorite, name="favorite"),
 ]
 

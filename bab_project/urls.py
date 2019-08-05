@@ -13,5 +13,7 @@ urlpatterns=[
     path('', views.home, name = "home"),
     path('admin/', admin.site.urls),
     path('bab/', include(bab_app_urls)),
+    path('users/',include('users.urls')),
+    path('accounts/',include('allauth.urls')),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 urlpatterns = format_suffix_patterns(urlpatterns)

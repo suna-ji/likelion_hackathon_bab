@@ -1,0 +1,90 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block inner %}
+
+<h1>{% trans "Sign In" %}</h1>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}Please sign in with one
+of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+  <div class="login-or">{% trans 'or' %}</div>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, then please
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {{ form|crispy }}
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br>
+  <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+</form>
+
+
+
+
+  <a href="{% provider_login_url 'github' %}">Github으로 로그인</a>
+  
+<a class="btn btn-block btn-social btn-kakao">
+  <span class="fa fa-kakao"></span> Sign in with Kakao
+</a>
+
+<a class="btn btn-block btn-social btn-google">
+  <span class="fa fa-google"></span> Sign in with Google
+</a>
+<a href="{% provider_login_url 'google' %}">Google으로 로그인</a><br>
+  
+
+<div class="eight columns">
+		<h3 class="headline"></h3><span class="line margin-bottom-35"></span><div class="clearfix"></div>
+		<!-- Social Icons / Start -->
+		<ul class="social-icons">
+			<li><a class="facebook" href="{% provider_login_url 'facebook' %}"><i class="icon-facebook"></i></a></li>
+      <li><a class="github" href="{% provider_login_url 'github' %}"><i class="icon-github"></i></a></li>
+      <li><a class="google" href="{% provider_login_url 'google' %}"><i class="icon-google"></i></a></li>
+			
+		</ul>
+		<!-- Social Icons / End -->
+	</div>
+
+{% endblock %}
+<script src="{% static 'scripts/jquery-1.11.0.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-migrate-1.2.1.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.superfish.js' %}"></script>
+<script src="{% static 'scripts/jquery.royalslider.min.js' %}"></script>
+<script src="{% static 'scripts/responsive-nav.js' %}"></script>
+<script src="{% static 'scripts/hoverIntent.js' %}"></script>
+<script src="{% static 'scripts/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'scripts/chosen.jquery.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.tooltips.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'scripts/jquery.pricefilter.js' %}"></script>
+<script src="{% static 'scripts/custom.js' %}"></script>
