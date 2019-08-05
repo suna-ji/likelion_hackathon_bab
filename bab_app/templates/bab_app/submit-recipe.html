@@ -152,6 +152,41 @@
 					<input type="button" value="재료추가"  id="btnAddRow" />
 					<input type="button" value="초기화" id="tableReset"/>
 			</div>
+
+			<!-- Additional Informations -->
+			<h4>마지막으로 추가정보를 입력해주세요!</h4>
+
+			<fieldset class="additional-info">
+				<table>
+
+				<tr class="ingredients-cont">
+					<td class="label"><label for="4">양</label></td>
+					<td><input id="4" type="text" placeholder="예)1인분" name = "amount"/></td>
+				</tr>
+
+				<tr class="ingredients-cont">
+					<td class="label"><label for="2">요리시간</label></td>
+					<td><input id="2" type="text" placeholder="에)30분" name = "cooking_time"/></td>
+				</tr>
+
+				<tr class="ingredients-cont">
+					<td class="label"><label for="4">난이도</label></td>
+					<td>
+						<select data-placeholder="Choose Level" class="chosen-select-no-single" name = "cooking_level">
+							<option value="1">&nbsp;</option>
+							<option value="아주쉬움">아주쉬움</option>
+							<option value="쉬움">쉬움</option>
+							<option value="보통">보통</option>
+							<option value="어려움">어려움</option>
+						</select>
+					</td>
+				</tr>
+				</table>
+			</fieldset>
+
+
+			<div class="margin-top-25"></div>
+
 	
 			<div class="margin-top-25"></div>
 

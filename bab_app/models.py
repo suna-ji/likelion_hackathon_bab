@@ -20,9 +20,15 @@ class Post(TimeStampedModel):
     image = ImageField(upload_to="img/")
     likes = ManyToManyField(User, related_name="liked_users")
     category = CharField(max_length = 50, default = "밥")
+    amount = CharField(max_length = 50 , null = True)
+    cooking_time = CharField(max_length = 50, null = True)
+    cooking_level = CharField(max_length = 50, null = True)
 
     def __str__(self):
        return self.title
+
+    def postingres(self):
+        return Postingre.objects.filter(post=self)   
 
     def comments(self):
         return Comment.objects.filter(post=self)

@@ -25,11 +25,11 @@ urlpatterns = [
     path('contact/',views.contact, name = "contact"),
     path('productpage/',views.productpage, name = "productpage"),
     path('postcreate/', views.postcreate, name = "postcreate"),
-    path('recipepage/',views.recipepage, name = "recipepage"),
     path('shop/',views.shop, name = "shop"),
     path('shortcodes/',views.shortcodes, name = "shortcodes"),
     path('submitrecipe/',views.submitrecipe, name = "submitrecipe"),
     path('typography/',views.typography, name = "typography"),
     path('sendemail/', views.sendemail, name = "sendemail"),
+    path('recipepage/<int:id>', views.recipepage, name = "recipepage"),
 ]
 

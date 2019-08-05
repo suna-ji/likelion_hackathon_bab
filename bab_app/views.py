@@ -36,7 +36,10 @@ def postcreate(request):
         content = request.POST.get('content')
         image = request.FILES.get('image')
         category = request.POST.get('category')
-        post = Post.objects.create(user = user, title = title, content = content, image = image, category = category)
+        amount = request.POST.get('amount')
+        cooking_time = request.POST.get('cooking_time')
+        cooking_level = request.POST.get('cooking_level')
+        post = Post.objects.create(user = user, title = title, content = content, image = image, category = category, amount = amount, cooking_time = cooking_time, cooking_level = cooking_level)
         # 포스트완성
         ingredientname_list = request.POST.getlist('ingredientname')
         ingredientnote_list = request.POST.getlist('ingredientnote')
@@ -50,8 +53,11 @@ def postcreate(request):
     return redirect('home')
     
     # 포스트-재료 만들기n
-def recipepage(request):
-    return render(request, 'bab_app/recipe-page.html')
+def recipepage(request,id):
+    therecipe = get_object_or_404(Post, pk = id)
+    postingres = Postingre.objects.filter(pk = id)
+    print(postingres)
+    return render(request, 'bab_app/recipe-page-1.html', {'therecipe' : therecipe, 'postingres':postingres})
     
 
 def shop(request):
