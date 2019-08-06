@@ -21,18 +21,17 @@ import json
 def browserecipes(request):
     user = request.user
     posts = Post.objects.all().order_by('-created_at').annotate(likes_count=Count('likes'))
-    ingredient = Ingredient.objects.all()
+    postingre = Postingre.objects.all()
     q = request.GET.get('q', '') # GET request의 인자중에 q 값이 있으면 가져오고, 없으면 빈 문자열 넣기
     if q: # q가 있으면
         posts = posts.filter(
             Q(title__icontains=q)|
             Q(content__icontains=q)
             ).distinct() # 제목에 q가 포함되어 있는 레코드만 필터링 
-
     context = {
         'user':user,
         'posts':posts,
-        'ingredient':ingredient,
+        'ingredient':postingre.ingredient,
         'q':q,
     }
     return render(request, 'bab_app/browse-recipes.html', context)

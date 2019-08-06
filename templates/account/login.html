@@ -4,8 +4,9 @@
 {% load account socialaccount %}
 {% load socialaccount %}
 {% load crispy_forms_tags %}
-
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+<div class="login">
+  
+  {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block inner %}
 
@@ -15,15 +16,12 @@
 
 {% if socialaccount_providers %}
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+  for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-<div class="socialaccount_ballot">
-
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-
+  <div class="socialaccount_ballot">
+    
+  
   <div class="login-or">{% trans 'or' %}</div>
 
 </div>
@@ -32,18 +30,18 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 {% else %}
 <p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
-
-
+  <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+  {% endif %}
+  
+  
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
   {{ form|crispy }}
-
+  
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-
+  
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a><br>
   <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
 </form>
@@ -51,8 +49,8 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 
 
-  <a href="{% provider_login_url 'github' %}">Github으로 로그인</a>
-  
+<a href="{% provider_login_url 'github' %}">Github으로 로그인</a>
+
 <a class="btn btn-block btn-social btn-kakao">
   <span class="fa fa-kakao"></span> Sign in with Kakao
 </a>
@@ -61,21 +59,26 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <span class="fa fa-google"></span> Sign in with Google
 </a>
 <a href="{% provider_login_url 'google' %}">Google으로 로그인</a><br>
-  
+
+
+<br><br><br><br><br>
+<ul class="socialaccount_providers">
+  {% include "socialaccount/snippets/provider_list.html" with process="login" %}</ul>
+  <!-- Social Icons / End -->
+</div>
 
 <div class="eight columns">
-		<h3 class="headline"></h3><span class="line margin-bottom-35"></span><div class="clearfix"></div>
-		<!-- Social Icons / Start -->
-		<ul class="social-icons">
-			<li><a class="facebook" href="{% provider_login_url 'facebook' %}"><i class="icon-facebook"></i></a></li>
-      <li><a class="github" href="{% provider_login_url 'github' %}"><i class="icon-github"></i></a></li>
+  <h3 class="headline"></h3><span class="line margin-bottom-35"></span><div class="clearfix"></div>
+  <!-- Social Icons / Start -->
+  <ul class="social-icons">
+    <li><a class="facebook" href="{% provider_login_url 'facebook' %}"><i class="icon-facebook"></i></a></li>
+    <li><a class="github" href="{% provider_login_url 'github' %}"><i class="icon-github"></i></a></li>
       <li><a class="google" href="{% provider_login_url 'google' %}"><i class="icon-google"></i></a></li>
 			
-		</ul>
-		<!-- Social Icons / End -->
-	</div>
-
-{% endblock %}
+    </ul>
+    
+</div>
+    {% endblock %}
 <script src="{% static 'scripts/jquery-1.11.0.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-migrate-1.2.1.min.js' %}"></script>
 <script src="{% static 'scripts/jquery.superfish.js' %}"></script>

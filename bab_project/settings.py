@@ -37,6 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+
+    # 소셜 로그인
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.kakao',
+    'allauth.socialaccount.providers.facebook',
+    'social_django',
+
+    # app
     'bab_app',
     'users',
 ]
@@ -70,6 +84,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'bab_project.wsgi.application'
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
 
 
 # Database
@@ -114,6 +136,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+SITE_ID = 1
 
 AUTH_USER_MODEL = "users.User"
 ACCOUNT_ALLOW_REGISTRATION = True
