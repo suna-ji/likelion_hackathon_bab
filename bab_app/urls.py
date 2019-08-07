@@ -10,6 +10,7 @@ urlpatterns = [
     path('contact/',views.contact, name = "contact"),
     path('productpage/',views.productpage, name = "productpage"),
     path('postcreate/', views.postcreate, name = "postcreate"),
+    path('comment_create/<int:id>', views.comment_create, name = "comment_create"),
     path('shop/',views.shop, name = "shop"),
     path('shortcodes/',views.shortcodes, name = "shortcodes"),
     path('submitrecipe/',views.submitrecipe, name = "submitrecipe"),

@@ -39,6 +39,7 @@ class Comment(TimeStampedModel):
     user = ForeignKey(User, on_delete=CASCADE)
     post = ForeignKey(Post, on_delete=CASCADE)
     message = TextField()
+    star = IntegerField(default = 0)
 
     def __str__(self):
         return self.message

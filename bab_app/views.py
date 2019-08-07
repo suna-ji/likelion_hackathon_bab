@@ -68,14 +68,26 @@ def postcreate(request):
             Postingre.objects.create(post = post, ingredient = ingredient, quantity = quantity)     
         # 포스트-재료완성                 
     return redirect('home')
-    
+
+
+def comment_create(request, id):
+    if request.method == "POST":
+        user = request.user
+        if user.is_anonymous:
+            return redirect('account_login')
+        post = get_object_or_404(Post, id = id)
+        message = request.POST.get('message')
+        Comment.objects.create(user = user, post = post, message = message, star = star)
+        return redirect('home')
+
     # 포스트-재료 만들기n
 def recipepage(request,id):
     therecipe = get_object_or_404(Post, pk = id)
     postingres = Postingre.objects.filter(pk = id)
-    print(postingres)
-    return render(request, 'bab_app/recipe-page-1.html', {'therecipe' : therecipe, 'postingres':postingres})
-    
+    best_posts = Post.objects.order_by('view_count')[:3]
+    return render(request, 'bab_app/recipe-page-1.html', {'therecipe' : therecipe, 'postingres':postingres, 'best_posts':best_posts })
+
+
 
 def shop(request):
     return render(request, 'bab_app/shop.html')
@@ -176,4 +188,5 @@ def favorite(request, user_id):
         }
     return render(request, 'bab_app/index-2.html', context)
 
-   
+
+
