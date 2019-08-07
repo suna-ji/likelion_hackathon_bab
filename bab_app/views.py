@@ -17,26 +17,42 @@ from django.http import HttpResponse, HttpResponseRedirect
 import json
 
 
-
 def browserecipes(request):
-    user = request.user
-    posts = Post.objects.all().order_by('-created_at').annotate(likes_count=Count('likes'))
-    ingredient = Ingredient.objects.all()
-    q = request.GET.get('q', '') # GET request의 인자중에 q 값이 있으면 가져오고, 없으면 빈 문자열 넣기
-    if q: # q가 있으면
-        posts = posts.filter(
+    if request.method == "POST":
+        user = request.user
+        posts = Post.objects.all().order_by('-created_at').annotate(likes_count=Count('likes'))
+        q = request.POST.get('q', '') # GET request의 인자중에 q 값이 있으면 가져오고, 없으면 빈 문자열 넣기
+        browse_category = request.POST.get('browse_category')
+        browse_ingredients = request.POST.getlist('browse_ingredients')
+        if q:
+            posts = posts.filter(
             Q(title__icontains=q)|
             Q(content__icontains=q)
-            ).distinct() # 제목에 q가 포함되어 있는 레코드만 필터링 
-
-    context = {
+            ).distinct() 
+        # 제목에 q가 포함되어 있는 레코드만 필터링 
+        posts = posts.filter(
+        Q(category__icontains = browse_category)
+        ).distinct()
+        for browse_ingredient in browse_ingredients:
+            posts = posts.filter(
+            Q(content__icontains = browse_ingredient)
+            ).distinct()
+        # 카테고리 필터링
+        # for post in posts:
+        #     for postingre in post.postingres:
+        #         for browse_ingredient in browse_ingredients:
+        #             if not postingre.ingredient == browse_ingredient:
+        #                 break
+        #             else    
+        # 재료필터링    
+        context = {
         'user':user,
         'posts':posts,
-        'ingredient':ingredient,
-        'q':q,
-    }
-    return render(request, 'bab_app/browse-recipes.html', context)
-  
+        }
+        return render(request, 'bab_app/find_recipe_show.html',context)
+    ingredients = Ingredient.objects.all()
+    return render(request, 'bab_app/browse-recipes.html',{'ingredients':ingredients})
+    
 
 
 
@@ -77,6 +93,7 @@ def comment_create(request, id):
             return redirect('account_login')
         post = get_object_or_404(Post, id = id)
         message = request.POST.get('message')
+        star = request.POST.get('starvalue')
         Comment.objects.create(user = user, post = post, message = message, star = star)
         return redirect('home')
 

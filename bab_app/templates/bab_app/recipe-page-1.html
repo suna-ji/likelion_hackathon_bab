@@ -43,7 +43,6 @@
 				<li>Cooking: <strong itemprop="cookTime">{{therecipe.cooking_time}}</strong></li>
 				<li>writer: <strong itemprop="cookTime">{{therecipe.user.username}}</strong></li>
 			</ul>
-			<a href="#" class="print"><i class="fa fa-print"></i> Print</a>
 			<div class="clearfix"></div>
 		</section>
 
@@ -143,7 +142,6 @@
 						<div class="avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
 						<div class="comment-content"><div class="arrow-comment"></div>
 							<div class="comment-by"><strong>{{comment.user.username}}</strong><span class="date">{{comment.created_at}}</span>
-								<a href="#" class="reply"><i class="fa fa-reply"></i> 답글달기</a>
 							</div>
 							<p>{{comment.message}}</p>
 							{% if comment.star == 5 %}
@@ -180,18 +178,6 @@
 							{% endif %}
 						</div>
 					{% endfor %}			
-						<!-- Second Level -->
-						<ul>
-							<li>
-								<div class="avatar"><img src="{% static 'images/author-photo.png' %}" alt="" /></div>
-								<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by"><strong>Sandra Fortin</strong><span class="date">7th, October 2014</span>
-								<a href="#" class="reply"><i class="fa fa-reply"></i> Reply</a>
-								</div>
-								<p>Donec porttitor tortor sit amet tortor egestas, id suscipit magna cursus. Nam facilisis, mi vel elementum porttitor, sapien magna posuere lorem, sed consectetur.</p>
-								</div>
-							</li>
-						</ul>
 
 					</li>
 				 </ul>

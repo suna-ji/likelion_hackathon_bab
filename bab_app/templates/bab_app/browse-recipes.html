@@ -9,71 +9,76 @@
 <!-- Titlebar
 ================================================== -->
 <section id="titlebar" class="browse-all">
-	<!-- Container -->
-	<div class="container">
-
-		<div class="eight columns">
-			<h2>Browse Recipes</h2>
+		<!-- Container -->
+		<div class="container">
+	
+			<div class="eight columns">
+				<h2>Browse Recipes</h2>
+			</div>
+	
 		</div>
-
-	</div>
-	<!-- Container / End -->
-</section>
-
-
-<!-- Container -->
-<div class="advanced-search-container">
-	<div class="container">
-		<div class="sixteen columns">
-			<div id="advanced-search">
-
-				<!-- Choose Category -->
-				<div class="select">
-					<label>Choose category</label>
-					<select data-placeholder="Choose Category" class="chosen-select-no-single">
-						{% for category in posts.category %}
-						<option value="{{ category }}}">{{ category }}</option>
-						{% endfor %}
-					</select>
-				</div>
-
-				<!-- Choose ingredients -->
-				
-				<form action="#" method="get">
-				
-				<div class="select included-ingredients">
-					<label>Select one or more ingredients that should be included in recipe</label>
-					<select data-placeholder="Included Ingredients" class="chosen-select" multiple>
-						{% for ingredient in ingredient %}
-						<option value="{{ ingredient }}" name="ingredient">{{ ingredient }}</option>
-						{% endfor %}
-					</select>
-					
+		<!-- Container / End -->
+	</section>
+	
+	
+	<!-- Container -->
+	<div class="advanced-search-container">
+		<div class="container">
+			<div class="sixteen columns">
+				<div id="advanced-search">
+	                <form action = "{% url 'bab:browserecipes' %}" method ="POST">
+					{% csrf_token %}	
+					<!-- Choose Category -->
+					<div class="select">
+						<h4>레시피의 카테고리를 선택해주세요</h4>
+						<select data-placeholder="Choose Category" class="chosen-select-no-single" name = "browse_category">
+							<option value="면">면</option>
+							<option value="밥">밥</option>
+							<option value="아침">아침</option>
+							<option value="점심">점심</option>
+							<option value="저녁">저녁</option>
+							<option value="국">국</option>
+							<option value="샐러드">샐러드</option>
+							<option value="고기">고기</option>
+							<option value="해산물">해산물</option>
+							<option value="야채">야채</option>
+							<option value="디저트">디저트</option>
+							<option value="기념일">기념일</option>
+							<option value="5분요리">5분요리</option>
+							<option value="전자레인지">전자레인지</option>
+							<option value="음료">음료</option>
+							<option value="빵">빵</option>
+							<option value="다이어트">다이어트</option>
+						</select>
+					</div>
 					<div class="clearfix"></div>
-					
+
+					<!-- Choose ingredients -->
+					<div class="select included-ingredients">
+						<label>원하는 재료를 선택해보세요!</label>
+						<select data-placeholder="여러개의 재료 선택도 가능합니다!" class="chosen-select" name = "browse_ingredients" multiple>
+							{% for ingredient in ingredients %}
+							<option value="{{ingredient.ingre_name}}">{{ingredient.ingre_name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="clearfix"></div>
+	
 					<!-- Search Input -->
 					<nav class="search-by-keyword">
-							<button><span>Search for Recipes</span><i class="fa fa-search"></i></button>
-							<input class="search-field" name="q" type="text" placeholder="Search by keyword" value="{{ q }}"/>
-						</form>
+						<button><span>Search for Recips</span><i class="fa fa-search"></i></button>
+						<input class="search-field" type="text" placeholder="키워드로 검색해보세요!" value=""/>
 					</nav>
-				
+					<div class="clearfix"></div>
+					</form>
 				</div>
-				
-
-				<div class="clearfix"></div>
 			</div>
-
 		</div>
 	</div>
-</div>
-
-
-<div class="margin-top-35"></div>
-
-
-
-
+	
+	
+	<div class="margin-top-35"></div>
+	
 
 <!-- Container -->
 <div class="container">

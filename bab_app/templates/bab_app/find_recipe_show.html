@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+<!-- Wrapper -->
+<div id="wrapper">
+<!-- Container -->
+    <div class="container">
+        <!-- Headline -->
+        <div class="sixteen columns">
+            <h3 class="headline">찾은 레시피를 확인해보세요!</h3>
+            <span class="line margin-bottom-35"></span>
+            <div class="clearfix"></div>
+        </div>
+        
+        <div class="clearfix"></div>
+        <!-- Isotope -->
+        <div class="isotope">
+        {% for post in posts %}
+        <!-- Recipe #1 -->
+        <div class="four isotope-box columns">
+            <!-- Thumbnail -->
+            <div class="thumbnail-holder">
+                <a href="{% url 'bab:recipepage' post.pk %}">
+                    <img src="{{ post.image.url}}" class="rsImg" alt="레시피 이미지 입니다.">
+                    <div class="hover-cover"></div>
+                    <div class="hover-icon">레시피 보기</div>
+                </a>
+            </div>
+            <!-- Content -->
+            <div class="recipe-box-content">
+                <h3><a href="{% url 'bab:recipepage' post.pk %}">{{ post.title }}</a></h3>
+                <!-- Add icon library -->
+                <div class="container">
+                    <span id="rateMe2"  class="empty-stars"></span>
+                </div>
+                <script>
+                    $(function(){ // wait for document to load
+                    $('input.wow').rating();
+                    });
+                </script>
+                <div class="like">
+                    {{ post.likes_count }}명이 좋아합니다.
+                    {% if user in post.likes.all %}
+                        <a href="{% url 'bab:like_toggle' post.id %}">좋아요 취소</a>
+                    {% else %}
+                        <a href="{% url 'bab:like_toggle' post.id %}">좋아요</a>
+                    {% endif %}
+                    {% if user in post.favorite.all %}
+                        <a href="{% url 'bab:favorite_toggle' post.id %}">즐겨찾기 취소</a>
+                    {% else %}
+                        <a href="{% url 'bab:favorite_toggle' post.id %}">즐겨찾기 추가</a>
+                    {% endif %}
+                </div>
+                <div class="recipe-meta"><i class="fa fa-clock-o"></i> {{ post.cooking_time }}</div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+
+        <!-- Pagination -->
+        <div class="sixteen columns">
+            <div class="pagination-container">
+                <nav class="pagination">
+                    <ul>
+                        <li><a href="#" class="current-page">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="pagination-next-prev">
+                    <ul>
+                        <li><a href="#" class="prev"></a></li>
+                        <li><a href="#" class="next"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper / End -->
+
+</body>
+</html>
+{% endblock %}
