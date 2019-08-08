@@ -51,7 +51,8 @@ def browserecipes(request):
         }
         return render(request, 'bab_app/find_recipe_show.html',context)
     ingredients = Ingredient.objects.all()
-    return render(request, 'bab_app/browse-recipes.html',{'ingredients':ingredients})
+    posts = Post.objects.all()
+    return render(request, 'bab_app/browse-recipes.html',{'ingredients':ingredients, 'posts':posts})
     
 
 
@@ -94,15 +95,27 @@ def comment_create(request, id):
         post = get_object_or_404(Post, id = id)
         message = request.POST.get('message')
         star = request.POST.get('starvalue')
+        # 별 받아서 그 포스트에 평균값으로 넣기
+        temp = 0
+        forcount = 0
+        for a in post.Starzips():
+            forcount += 1
+            temp += a.star_rating
+        if not forcount == 0:
+            post.star_rating = round(temp/forcount)
+            post.save()      
         Comment.objects.create(user = user, post = post, message = message, star = star)
         return redirect('home')
 
     # 포스트-재료 만들기n
 def recipepage(request,id):
     therecipe = get_object_or_404(Post, pk = id)
+    therecipe.view_count += 1
+    therecipe.save()
     postingres = Postingre.objects.filter(pk = id)
     best_posts = Post.objects.order_by('view_count')[:3]
-    return render(request, 'bab_app/recipe-page-1.html', {'therecipe' : therecipe, 'postingres':postingres, 'best_posts':best_posts })
+    latest_posts = Post.objects.order_by('created_at')[:3]
+    return render(request, 'bab_app/recipe-page-1.html', {'therecipe' : therecipe, 'postingres':postingres, 'best_posts':best_posts , 'latest_posts':latest_posts})
 
 
 

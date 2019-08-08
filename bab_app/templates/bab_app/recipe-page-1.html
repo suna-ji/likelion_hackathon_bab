@@ -20,11 +20,40 @@
 		<section class="recipe-header">
 			<div class="title-alignment">
 				<h2>{{therecipe.title}}</h2>
-				<div class="rating five-stars">
-					<div class="star-rating"></div>
-					<div class="star-bg"></div>
-				</div>
-				<span><a href="#reviews">(4 reviews)</a></span>
+				{% if therecipe.star_rating == 5 %}
+					<div class="rating five-stars">
+						<div class="star-rating"></div>
+						<div class="star-bg"></div>
+					</div>
+				{% else %}
+					{% if therecipe.star_rating == 4 %}
+						<div class="rating four-stars">
+							<div class="star-rating"></div>
+							<div class="star-bg"></div>
+						</div>
+					{% else %}
+						{% if therecipe.star_rating == 3 %}
+							<div class="rating three-stars">
+								<div class="star-rating"></div>
+								<div class="star-bg"></div>
+							</div>
+						{% else %}
+							{% if therecipe.star_rating == 2 %}
+								<div class="rating two-stars">
+									<div class="star-rating"></div>
+									<div class="star-bg"></div>
+								</div>
+							{% else %}
+								<div class="rating one-stars">
+									<div class="star-rating"></div>
+									<div class="star-bg"></div>
+								</div>
+							{% endif %}
+						{% endif %}
+					{% endif %}
+				{% endif %}
+				<span><a href="#reviews">총{{therecipe.comments.count }}개의 댓글이 있습니다!</a></span><br>
+				<span><a href="#">조회수: {{therecipe.view_count}}</a></span>
 			</div>
 		</section>
 		
@@ -66,17 +95,7 @@
 		</ol>
 
 
-		<!-- Share Post -->
-		<ul class="share-post">
-			<li><a href="#" class="facebook-share">Facebook</a></li>
-			<li><a href="#" class="twitter-share">Twitter</a></li>
-			<li><a href="#" class="google-plus-share">Google Plus</a></li>
-			<li><a href="#" class="pinterest-share">Pinterest</a></li>
-
-			<!-- <li><a href="#add-review" class="rate-recipe">Add Review</a></li> -->
-		</ul>
-		<div class="clearfix"></div>
-
+		
 		
 		<!-- Meta -->
 <!--  		<div class="post-meta">
@@ -111,10 +130,38 @@
 				<div class="recipe-box-content">
 					<h3><a href="#">{{best_post.title}}</a></h3>
 					
-					<div class="rating five-stars">
-						<div class="star-rating"></div>
-						<div class="star-bg"></div>
-					</div>
+					{% if best_post.star_rating == 5 %}
+						<div class="rating five-stars">
+							<div class="star-rating"></div>
+							<div class="star-bg"></div>
+						</div>
+					{% else %}
+						{% if best_post.star_rating == 4 %}
+							<div class="rating four-stars">
+								<div class="star-rating"></div>
+								<div class="star-bg"></div>
+							</div>
+						{% else %}
+							{% if best_post.star_rating == 3 %}
+								<div class="rating three-stars">
+									<div class="star-rating"></div>
+									<div class="star-bg"></div>
+								</div>
+							{% else %}
+								{% if best_post.star_rating == 2 %}
+									<div class="rating two-stars">
+										<div class="star-rating"></div>
+										<div class="star-bg"></div>
+									</div>
+								{% else %}
+									<div class="rating one-stars">
+										<div class="star-rating"></div>
+										<div class="star-bg"></div>
+									</div>
+								{% endif %}
+							{% endif %}
+						{% endif %}
+					{% endif %}
 
 					<div class="recipe-meta"><i class="fa fa-clock-o"></i>{{best_post.cooking_time}}</div>
 
@@ -241,119 +288,61 @@
 ================================================== -->
 <div class="four columns">
 
-	<!-- Search Form -->
-	<div class="widget search-form">
-		<nav class="search">
-			<form action="#" method="get">
-				<button><i class="fa fa-search"></i></button>
-				<input class="search-field" type="text" placeholder="Search for recipes" value=""/>
-			</form>
-		</nav>
-		<div class="clearfix"></div>
-	</div>
-
-
-	<!-- Author Box -->
-	<div class="widget">
-		<div class="author-box">
-			<span class="title">Author</span>
-			<span class="name">Sandra <br> Fortin</span>
-			<span class="contact"><a href="mailto:sandra@chow.com">sandra@chow.com</a></span>
-			<img src="{% static 'images/author-photo.png' %}" alt="">
-			<p>I'm Sandra and this is where I share my stuff. I am madly in love with food. You will find a balance of healthy recipes, comfort food and indulgent desserts.</p>
-		</div>
-	</div>
-
+	
 
 	<!-- Popular Recipes -->
 	<div class="widget">
-		<h4 class="headline">Popular Recipes</h4>
+		<h4 class="headline">최근에 올라온 다른 레시피들도<br> 확인해보세요!</h4>
 		<span class="line margin-bottom-30"></span>
 		<div class="clearfix"></div>
-		
+		{% for latest_post in latest_posts %}
 		<!-- Recipe #1 -->
-		<a href="#" class="featured-recipe">
-			<img src="{% static 'images/featuredRecipe-01.jpg' %}" alt="">
-
+		<a href="{% url 'bab:recipepage' latest_post.id %}" class="featured-recipe">
+			<img src="{{latest_post.image.url}}" class="rsImg" alt="레시피 이미지 입니다.">
 			<div class="featured-recipe-content">
-				<h4>Choclate Cake With Green Tea Cream</h4>
-			
-				<div class="rating five-stars">
-					<div class="star-rating"></div>
-					<div class="star-bg"></div>
-				</div>
+				<h4 style = "width:100%">{{latest_post.title}}</h4>
+				{% if latest_post.star_rating == 5 %}
+					<div class="rating five-stars">
+						<div class="star-rating"></div>
+						<div class="star-bg"></div>
+					</div>
+				{% else %}
+					{% if latest_post.star_rating == 4 %}
+						<div class="rating four-stars">
+							<div class="star-rating"></div>
+							<div class="star-bg"></div>
+						</div>
+					{% else %}
+						{% if latest_post.star_rating == 3 %}
+							<div class="rating three-stars">
+								<div class="star-rating"></div>
+								<div class="star-bg"></div>
+							</div>
+						{% else %}
+							{% if latest_post.star_rating == 2 %}
+								<div class="rating two-stars">
+									<div class="star-rating"></div>
+									<div class="star-bg"></div>
+								</div>
+							{% else %}
+								<div class="rating one-stars">
+									<div class="star-rating"></div>
+									<div class="star-bg"></div>
+								</div>
+							{% endif %}
+						{% endif %}
+					{% endif %}
+				{% endif %}
 			</div>
 			<div class="post-icon"></div>
 		</a>
-
-		<!-- Recipe #2 -->
-		<a href="#" class="featured-recipe">
-			<img src="{% static 'images/featuredRecipe-02.jpg' %}" alt="">
-
-			<div class="featured-recipe-content">
-				<h4>Mexican Grilled Corn Recipe</h4>
-			
-				<div class="rating five-stars">
-					<div class="star-rating"></div>
-					<div class="star-bg"></div>
-				</div>
-			</div>
-			<div class="post-icon"></div>
-		</a>
-
-		<!-- Recipe #3 -->
-		<a href="#" class="featured-recipe">
-			<img src="{% static 'images/featuredRecipe-03.jpg' %}" alt="">
-
-			<div class="featured-recipe-content">
-				<h4>Pollo Borracho With Homemade Tortillas</h4>
-			
-				<div class="rating five-stars">
-					<div class="star-rating"></div>
-					<div class="star-bg"></div>
-				</div>
-			</div>
-			<div class="post-icon"></div>
-		</a>
-
+        {% endfor %}
 		<div class="clearfix"></div>
 	</div>
 
 
 	<!-- Popular Recipes -->
-	<div class="widget">
-		<h4 class="headline">Share</h4>
-		<span class="line margin-bottom-30"></span>
-		<div class="clearfix"></div>
-		
-		<ul class="share-buttons">
-			<li class="facebook-share">
-				<a href="#">
-					<span class="counter">1,234</span>
-					<span class="counted">Fans</span>
-					<span class="action-button">Like</span>
-				</a>
-			</li>
-
-			<li class="twitter-share">
-				<a href="#">
-					<span class="counter">863</span>
-					<span class="counted">Followers</span>
-					<span class="action-button">Follow</span>
-				</a>
-			</li>
-
-			<li class="google-plus-share">
-				<a href="#">
-					<span class="counter">902</span>
-					<span class="counted">Followers</span>
-					<span class="action-button">Follow</span>
-				</a>
-			</li>
-		</ul>
-		<div class="clearfix"></div>
-	</div>
-
+	
 </div>
 
 
