@@ -20,7 +20,7 @@ import json
 def browserecipes(request):
     if request.method == "POST":
         user = request.user
-        posts = Post.objects.all().order_by('-created_at').annotate(likes_count=Count('likes'))
+        posts = Post.objects.all().order_by('-created_at')
         q = request.POST.get('q', '') # GET request의 인자중에 q 값이 있으면 가져오고, 없으면 빈 문자열 넣기
         browse_category = request.POST.get('browse_category')
         browse_ingredients = request.POST.getlist('browse_ingredients')
