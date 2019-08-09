@@ -115,7 +115,8 @@ def recipepage(request,id):
     postingres = Postingre.objects.filter(pk = id)
     best_posts = Post.objects.order_by('view_count')[:3]
     latest_posts = Post.objects.order_by('created_at')[:3]
-    return render(request, 'bab_app/recipe-page-1.html', {'therecipe' : therecipe, 'postingres':postingres, 'best_posts':best_posts , 'latest_posts':latest_posts})
+    user = request.user
+    return render(request, 'bab_app/recipe-page-1.html', {'therecipe' : therecipe, 'postingres':postingres, 'best_posts':best_posts , 'latest_posts':latest_posts, 'user':user})
 
 
 
@@ -170,23 +171,30 @@ def like_toggle(request, post_id):
     return redirect('home')
 
 
-def post_like(request):
+def post_like(request, post_id):
    user = request.user
    if user.is_anonymous:
        return redirect('account_login')
-   pk = request.POST.get('pk', None) # ajax 통신을 통해서 template에서 POST방식으로 전달
-   post = get_object_or_404(Post, pk=pk)
+   post = get_object_or_404(Post, pk=post_id)
    is_like = user in post.likes.all()
    if is_like:
        post.likes.remove(user)
-       message = "좋아요 취소"
+       if not post.likes_count == 0:
+           post.likes_count -= 1
+           post.save()
+       message = "like_cancel"
    else:
        post.likes.add(user)
-       message = "좋아요"
-   context = {'like_count': post.likes_count,
+       post.likes_count += 1
+       post.save()
+       message = "like"
+   context = {
               'message': message,
+              'likes_count': post.likes_count,
               }
    return HttpResponse(json.dumps(context), content_type="application/json")
+
+
 
 
 def favorite_toggle(request, post_id):

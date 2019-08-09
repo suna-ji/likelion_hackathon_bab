@@ -18,7 +18,7 @@ urlpatterns = [
     path('sendemail/', views.sendemail, name = "sendemail"),
     path('recipepage/<int:id>', views.recipepage, name = "recipepage"),
     path('like_toggle/<int:id>/', views.like_toggle, name="like_toggle"),
-    path('post_like/', views.post_like, name="post_like"),
+    path('post_like/<int:post_id>/', views.post_like, name="post_like"),
     path('favorite_toggle/<int:post_id>/', views.favorite_toggle, name="favorite_toggle"),
     path('favorite/<int:user_id>/', views.favorite, name="favorite"),
 ]

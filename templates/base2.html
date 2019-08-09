@@ -3,6 +3,7 @@
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
+
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
@@ -15,9 +16,7 @@
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href ="{% static 'css/font-awesome.css' %}"> 
 <link rel="stylesheet" href="{% static 'css/colors/green.css' %}" id="colors">
-<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -28,78 +27,6 @@
 
 <body>
 
-<!-- Wrapper -->
-<div id="wrapper">
-	
-
-<!-- Header
-================================================== -->
-<header id="header">
-
-<!-- Container -->
-<div class="container">
-
-	<!-- Logo / Mobile Menu -->
-	<div class="three columns">
-		<div id="logo">
-			<h1><a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Chow" /></a></h1>
-		</div>
-	</div>
-
-
-<!-- Navigation
-================================================== -->
-<div class="thirteen columns navigation">
-	<nav id="navigation" class="menu nav-collapse">
-		<ul>
-			<li><a href="{% url 'home' %}">홈</a></li>
-			
-			<li><a href="#">레시피</a>
-				<ul>
-					<li><a href="{% url 'bab:browserecipes' %}">레시피 찾기</a></li>
-					<li><a href="{% url 'bab:submitrecipe' %}">레시피 등록</a></li>
-				</ul>
-			</li>
-			{% if request.user.is_authenticated %}
-			<li class="nav-item">
-				<a class="nav-link" href="#">{{ request.user }}님</a>
-				<ul>
-					<!-- <li>
-						<form method="post" action="{% url 'account_logout' %}">
-						{% csrf_token %}
-						
-						<input type = "submit"  value = "로그아웃"></button>
-						</form>
-					</li> -->
-					<li><a href="{% url 'account_logout' %}">로그아웃</a></li>
-					<li><a href="{% url 'bab:favorite' user.id %}">즐겨찾기</a></li>
-				</ul>
-			</li>
-			{% else %}
-			<li><a href="#">로그인</a>
-				<ul>
-					<li><a href="{% url 'account_login' %}">로그인</a></li>
-					<li><a href="{% url 'account_signup' %}">회원가입</a></li>
-					
-				</ul>
-			</li>
-			{% endif %}
-		
-			<li>
-				{% if request.user.is_authenticated %}
-				<a href="{% url 'bab:contact' %}">문의</a>
-				{% else %}
-				<a href="{% url 'account_login' %}">문의</a>
-				{% endif %}
-			</li>
-			
-		</ul>
-	</nav>
-</div>
-
-</div>
-<!-- Container / End -->
-</header>
 
 
 

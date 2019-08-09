@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<body>
 <!-- Recipe Background -->
 <div class="recipeBackground">
 	<img src="{% static 'images/slider2.jpg' %}" alt="" />
@@ -52,12 +51,20 @@
 						{% endif %}
 					{% endif %}
 				{% endif %}
-				<span><a href="#reviews">총{{therecipe.comments.count }}개의 댓글이 있습니다!</a></span><br>
-				<span><a href="#">조회수: {{therecipe.view_count}}</a></span>
+				<span>
+					<a href="#reviews">총{{therecipe.comments.count }}개의 댓글이 있습니다!</a>
+					<a href="#">조회수: {{therecipe.view_count}}</a>
+					{% if user in therecipe.likes.all %}
+						<i class="icon ion-ios-heart like" data-pk="{{ therecipe.pk }}"></i>
+						<i id = "count-{{therecipe.id}}">{{post.likes_count}}</i>		
+					{% else %}
+						<i class="icon ion-ios-heart-empty like" data-pk="{{ therecipe.pk }}"></i>
+						<i id = "count-{{therecipe.id}}">{{post.likes_count}}</i>
+					{% endif %}
+				</span>
 			</div>
 		</section>
 		
-
 		<!-- Slider -->
 		<div class="recipeSlider rsDefault">
 			<img src="{{therecipe.image.url}}" class="rsImg" alt="레시피 이미지 입니다.">
@@ -287,9 +294,6 @@
 <!-- Sidebar
 ================================================== -->
 <div class="four columns">
-
-	
-
 	<!-- Popular Recipes -->
 	<div class="widget">
 		<h4 class="headline">최근에 올라온 다른 레시피들도<br> 확인해보세요!</h4>
@@ -371,7 +375,7 @@
 <script src="{% static 'scripts/jquery.tooltips.min.js' %}"></script>
 <script src="{% static 'scripts/jquery.magnific-popup.min.js' %}"></script>
 <script src="{% static 'scripts/jquery.pricefilter.js' %}"></script>
-<script src="{% static 'scripts/custom.js' %}"></script>
+<!-- <script src="{% static 'scripts/custom.js' %}"></script> -->
 
 
 <!-- Style Switcher
@@ -410,6 +414,7 @@
 <!-- 별점 css
 ================================================== -->
 <style>
+
 	/* Rating Star Widgets Style */
 	.rating-stars ul {
 	list-style-type:none;
@@ -437,6 +442,10 @@
 	/* Selected state of the stars */
 	.rating-stars ul > li.star.selected > i.fa {
 	color: #ffc741;
+	}
+
+	.like {
+		color: red;
 	}
 </style>
 <!-- 별점 jquery
@@ -471,7 +480,7 @@
     var stars = $(this).parent().children('li.star');
     
     for (i = 0; i < stars.length; i++) {
-      $(stars[i]).removeClass('selected');
+      $(stars[i]).removeClass('selected');vi
     }
     
     for (i = 0; i < onStar; i++) {
@@ -499,11 +508,50 @@
 function responseMessage(msg) {
   $('.success-box').fadeIn(200);  
   $('.success-box div.text-message').html("<span>" + msg + "</span>");
-
-
 }
-</script>
 
-</body>
-</html>
+$(".like").click(function(){ // 버튼을 click하면 class의 like를 가져와서 ajax 기능 시작
+	var pk = $(this).data('pk');
+	$.ajax({
+		type: "POST", // 데이터 전송 타입
+		url: "{% url 'bab:post_like' therecipe.pk %}", // 새로고침은 안하지만 데이터를 보낼 url은 필요하므로 보낼 url 지정
+		data: {'csrfmiddlewaretoken': '{{csrf_token}}'},
+		dataType: "json",
+		// post_like에서 반환하기로 한 데이터 타입 json {'like_count': post.like_count}을 반환
+	
+		success: function(response){ // 통신 성공시 수행
+			if (response.message == "like") {
+				$(".like").removeClass('ion-ios-heart-empty');
+				$(".like").addClass('ion-ios-heart');
+				$("#count-"+pk).html(response.likes_count+"개")
+
+			}
+			else if (response.message == "like_cancel") {
+				$(".like").removeClass('ion-ios-heart');
+				$(".like").addClass('ion-ios-heart-empty');
+				$("#count-"+pk).html(response.likes_count+"개")
+			}
+		},
+		error: function(request, status, error){ // 통신 실패시 수행
+			alert("로그인이 필요합니다.")
+			window.location.replace("/accounts/login/")
+		},
+	})
+})
+
+
+// <span>
+// 	{% if user in therecipe.likes.all %}
+// 		<button class="btn btn-outline-info">
+// 			<i class="icon ion-ios-heart like" data-pk="{{ therecipe.pk }}"></i>
+// 		</button>
+// 	{% else %}
+// 		<button class="btn btn-outline-info">
+// 			<i class="icon ion-ios-heart-empty like" data-pk="{{ therecipe.pk }}"></i>
+// 		</button>
+// 	{% endif %}
+// </span>
+
+
+</script>
 {% endblock %}

@@ -17,6 +17,7 @@ class Post(TimeStampedModel):
     title = CharField(max_length=100)
     content = TextField()
     view_count = IntegerField(default=0)
+    likes_count = IntegerField(default = 0)
     star_rating = IntegerField(default = 0)
     image = ImageField(upload_to="img/")
     likes = ManyToManyField(User, related_name="liked_users")
