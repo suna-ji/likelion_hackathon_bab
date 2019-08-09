@@ -480,7 +480,7 @@
     var stars = $(this).parent().children('li.star');
     
     for (i = 0; i < stars.length; i++) {
-      $(stars[i]).removeClass('selected');vi
+      $(stars[i]).removeClass('selected');
     }
     
     for (i = 0; i < onStar; i++) {
@@ -538,20 +538,5 @@ $(".like").click(function(){ // 버튼을 click하면 class의 like를 가져와
 		},
 	})
 })
-
-
-// <span>
-// 	{% if user in therecipe.likes.all %}
-// 		<button class="btn btn-outline-info">
-// 			<i class="icon ion-ios-heart like" data-pk="{{ therecipe.pk }}"></i>
-// 		</button>
-// 	{% else %}
-// 		<button class="btn btn-outline-info">
-// 			<i class="icon ion-ios-heart-empty like" data-pk="{{ therecipe.pk }}"></i>
-// 		</button>
-// 	{% endif %}
-// </span>
-
-
 </script>
 {% endblock %}
